@@ -1,0 +1,10 @@
+/* General Styling for Forms */
+input {
+    background-color: #f9f9f9;
+  }
+  
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+  }
+  

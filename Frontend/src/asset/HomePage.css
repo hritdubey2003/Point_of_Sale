@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  /* Dandelion Animation */
+  .dandelion-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .dandelion {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: dandelion-fall 10s linear infinite;
+  }
+  
+  .dandelion:nth-child(even) {
+    width: 12px;
+    height: 12px;
+    animation-duration: 12s;
+  }
+  
+  .dandelion:nth-child(odd) {
+    width: 8px;
+    height: 8px;
+    animation-duration: 8s;
+  }
+  
+  .dandelion:nth-child(n) {
+    left: calc(100% * var(--i) / 50);
+    animation-delay: calc(var(--i) * -0.5s);
+  }
+  
+  @keyframes dandelion-fall {
+    0% {
+      transform: translateY(-10vh) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) translateX(calc(-10vw + 20vw * var(--i)));
+      opacity: 0;
+    }
+  }
+  
+  /* Animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1.5s ease-in-out;
+  }
+  
+  /* Section Styling */
+  section {
+    position: relative;
+    z-index: 10;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(
+      to right,
+      rgba(59, 130, 246, 1),
+      rgba(129, 140, 248, 1),
+      rgba(236, 72, 153, 1)
+    );
+  }

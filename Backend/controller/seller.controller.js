@@ -3,9 +3,9 @@ import cookieParser from "cookie-parser";
 
 export const register = async ( req , res ) => {
     try {
-        const { sellerName, email, mobile, password } = req.body;
+        const { username, email, mobile, password } = req.body;
 
-        if ( !sellerName || !email || !mobile || !password ) {
+        if ( !username || !email || !mobile || !password ) {
             throw new Error("All fields are required.");
             res.status(400).json({ "error": "All fields are required." });
             return;
@@ -34,7 +34,7 @@ export const register = async ( req , res ) => {
         const hashedPassword = await seller.hashPassword( password );
 
         const newSeller = new seller({
-            sellerName,
+            username,
             email,
             mobile,
             password: hashedPassword
