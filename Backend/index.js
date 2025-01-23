@@ -12,7 +12,7 @@ App.use(Cors());
 App.use(cookieParser());
 
 App.listen( process.env.PORT , () => {
-    console.log(`Server is runnig on ${process.env.PORT }`);
+    console.log(`Server is running on ${process.env.PORT }`);
 });
 
 connectDB();
