@@ -7,7 +7,7 @@ function ServicePage() {
   const [services, setServices] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState({});
-  const [localQuantities, setLocalQuantities] = useState({}); 
+  const [localQuantities, setLocalQuantities] = useState({});
   const [loading, setLoading] = useState({});
   const Navigate = useNavigate();
 
@@ -22,13 +22,16 @@ function ServicePage() {
       }
 
       try {
-        const response = await fetch("https://point-of-sale-bay.vercel.app/user/services", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://point-of-sale-bay.vercel.app/user/services",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await response.json();
         if (response.ok && data.success) {
@@ -54,17 +57,20 @@ function ServicePage() {
       if (!token) return;
 
       try {
-        const response = await fetch("https://point-of-sale-bay.vercel.app/user/getcartItems", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://point-of-sale-bay.vercel.app/user/getcartItems",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await response.json();
         if (data.success) {
-          setCart(data.cart); 
+          setCart(data.cart);
         }
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -78,8 +84,9 @@ function ServicePage() {
   const handleQuantityChange = (serviceId, change) => {
     setLocalQuantities((prev) => {
       const updatedQuantities = { ...prev };
-      updatedQuantities[serviceId] = (updatedQuantities[serviceId] || 0) + change;
-      if (updatedQuantities[serviceId] < 0) updatedQuantities[serviceId] = 0; 
+      updatedQuantities[serviceId] =
+        (updatedQuantities[serviceId] || 0) + change;
+      if (updatedQuantities[serviceId] < 0) updatedQuantities[serviceId] = 0;
       return updatedQuantities;
     });
   };
@@ -93,22 +100,25 @@ function ServicePage() {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("https://point-of-sale-bay.vercel.app/user/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          serviceId: service._id,
-          sellerId: service.sellerId,
-          quantity,
-        }),
-      });
+      const response = await fetch(
+        "https://point-of-sale-bay.vercel.app/user/cart/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            serviceId: service._id,
+            sellerId: service.sellerId,
+            quantity,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (data.success) {
-        setCart(data.cart); 
+        setCart(data.cart);
         setLocalQuantities((prev) => ({
           ...prev,
           [service._id]: 0,
@@ -119,7 +129,7 @@ function ServicePage() {
     } catch (error) {
       console.error("Error adding to cart:", error);
     } finally {
-      setLoading((prev) => ({ ...prev, [service._id]: false })); 
+      setLoading((prev) => ({ ...prev, [service._id]: false }));
     }
   };
 
@@ -133,9 +143,11 @@ function ServicePage() {
       <LoggedNavbar cartQuantity={cartQuantity} />
       {isAuthenticated ? (
         <div className="services-container p-8 bg-gray-50 min-h-screen">
-          <h2 className="text-4xl font-semibold text-center text-gray-800 mb-12">
-            Our Premium Services! "
-            Ghar Ho Ye Office, We're Perfect at Service!"
+          <h2 class="text-4xl font-semibold text-center text-gray-800 mb-6">
+            Our Premium Services!
+          </h2>
+          <h2 class="text-4xl font-semibold text-center text-slate-700 mb-12 cursor-text">
+            "Ghar Ho Ya Office, We're Perfect at Service!"
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {services.map((service) => (
@@ -152,7 +164,9 @@ function ServicePage() {
                   <h3 className="text-2xl font-semibold text-gray-800 mb-3">
                     {service.name}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {service.description}
+                  </p>
                   <p className="text-xl font-bold text-green-600 mb-4">
                     ${service.price}
                   </p>
@@ -198,7 +212,7 @@ function ServicePage() {
           You are not authenticated. Redirecting to Home...
         </div>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
