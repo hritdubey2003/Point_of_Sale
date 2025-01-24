@@ -19,6 +19,8 @@ App.listen( process.env.PORT , () => {
 });
 
 connectDB();
-App.get('/' , <div>Hello I am here!</div>)
+App.get('/', (req, res) => {
+    res.send('<h1>Home Page</h1>');
+});
 App.use('/user' , userRoute);
 App.use('/seller' , sellerRoute);
