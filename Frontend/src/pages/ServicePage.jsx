@@ -168,7 +168,7 @@ function ServicePage() {
                     {service.description}
                   </p>
                   <p className="text-xl font-bold text-green-600 mb-4">
-                    INR{service.price}
+                    INR: {service.price}
                   </p>
 
                   <div className="flex justify-center items-center space-x-4 mb-4">

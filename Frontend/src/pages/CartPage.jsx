@@ -153,7 +153,7 @@ function CartPage() {
           {cart.totalPrice > 0 && (
             <div className="mt-12 text-center">
               <p className="text-2xl font-semibold text-gray-900">
-                Total Price: <span className="text-green-600">INR{cart.totalPrice}</span>
+                Total Price: <span className="text-green-600">INR: {cart.totalPrice}</span>
               </p>
               <button
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-6 hover:bg-blue-700 transition duration-200 ease-in-out transform"
