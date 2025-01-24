@@ -160,7 +160,7 @@ The frontend application includes the following routes:
 
 ### Reason for Excluding Seller Portion
 
-The seller portion is not included in the frontend as the primary focus of this application is on providing users with a seamless experience for browsing and purchasing services. Additionally, seller functionalities such as service management are better suited for a dedicated admin or seller portal, which can be developed separately for enhanced scalability and role-specific features.
+The seller portion is not included in the frontend as the primary focus of this application is on providing users with a seamless experience for browsing and purchasing services. Additionally, seller functionalities such as service management are better suited for a dedicated admin or seller portal, which can be developed separately for enhanced scalability and role-specific features. But for testing the seller portion, I have exposed the api in the backend where you can look for it's functionality! ALso, I was bit busy with other assignments, so due to lack of time seller portion is not covered which can be covered as instructed further.
 
 ---
 
