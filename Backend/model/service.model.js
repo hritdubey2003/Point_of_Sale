@@ -13,6 +13,10 @@ const serviceSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  img_url: {
+    type: "String",
+    required: true
+  },
   sellerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "seller",

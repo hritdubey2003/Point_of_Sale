@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../asset/AuthPage.css";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function SigninPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,27 +21,19 @@ function SigninPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Determine the API endpoint based on the 'isSeller' state
-    const apiUrl = formData.isSeller
-      ? "http://localhost:12000/seller/login"
-      : "http://localhost:12000/user/login";
-
+    const apiUrl = formData.isSeller ? "http://localhost:12000/seller/login" : "http://localhost:12000/user/login";
+  
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
-        alert("Login Successful!");
+        localStorage.setItem('authToken', data.token); // Store token
+        navigate('/services');
       } else {
         alert(data.message || "Invalid Credentials");
       }

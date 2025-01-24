@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import user from "../model/user.model.js";
 import Service from "../model/service.model.js";
 import Purchased from "../model/purchased.model.js";
+import Cart from "../model/cart.model.js";
 
 export const register = async ( req , res ) => {
     try {
@@ -38,7 +39,7 @@ export const register = async ( req , res ) => {
 
         await newUser.save();
 
-        return res.status(201).json({ "message": "User registered successfully." , "token": token , "user": newUser });
+        return res.status(201).json({ "message": "User registered successfully." , "user": newUser });
 
     } catch ( err ) {
         console.error(err);        
@@ -71,7 +72,7 @@ export const login = async ( req , res ) => {
         }
 
         const token = loggeduser.generateAuthToken();
-        res.cookie( 'token' , token , { httpOnly: true } );
+        res.cookie( 'token' , token , { httpOnly: true , sameSite: 'None' } );
         return res.status(200).json({"user": loggeduser , "token": token , "Message": "Logged In Successfully!"});
 
     } catch( err ) {
@@ -142,50 +143,56 @@ export const getAllServices = async (req, res) => {
   };
   
 
-  export const removeServiceFromCart = async (req, res) => {
-    const { serviceId } = req.body; // Get the serviceId from the request body
-    const userId = req.user._id; // Get the userId from the authenticated user (from middleware)
-  
-    try {
-      const cart = await Cart.findOne({ userId });
-      if (!cart) {
-        return res.status(404).json({
-          success: false,
-          message: 'Cart not found',
-        });
-      }
-  
-      const serviceIndex = cart.services.findIndex(
-        (item) => item.serviceId.toString() === serviceId
-      );
-  
-      if (serviceIndex === -1) {
-        return res.status(404).json({
-          success: false,
-          message: 'Service not found in the cart',
-        });
-      }
-  
-      const removedService = cart.services[serviceIndex];
-      const service = await Service.findById(removedService.serviceId);
-      cart.totalPrice -= service.price * removedService.quantity;
-      cart.services.splice(serviceIndex, 1);
-  
-      await cart.save();
-  
-      res.status(200).json({
-        success: true,
-        message: 'Service removed from cart successfully',
-        cart,
-      });
-    } catch (error) {
-      console.error('Error removing service from cart:', error.message);
-      res.status(500).json({
+ export const removeServiceFromCart = async (req, res) => {
+  const { serviceId } = req.body; // Get the serviceId from the request body
+  const userId = req.user._id; // Get the userId from the authenticated user (from middleware)
+
+  try {
+    console.log('Service ID:', serviceId); // Log the serviceId for debugging
+
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(404).json({
         success: false,
-        message: 'Server error while removing service from cart',
+        message: 'Cart not found',
       });
     }
-  };
+
+    // Log the cart contents for debugging
+    console.log('Cart contents:', cart.services);
+
+    const serviceIndex = cart.services.findIndex(
+      (item) => item.serviceId.toString() === serviceId
+    );
+
+    if (serviceIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: 'Service not found in the cart',
+      });
+    }
+
+    const removedService = cart.services[serviceIndex];
+    const service = await Service.findById(removedService.serviceId);
+    cart.totalPrice -= service.price * removedService.quantity;
+    cart.services.splice(serviceIndex, 1);
+
+    await cart.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Service removed from cart successfully',
+      cart,
+    });
+  } catch (error) {
+    console.error('Error removing service from cart:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while removing service from cart',
+    });
+  }
+};
+
   
   export const purchaseFromCart = async (req, res) => {
     const userId = req.user._id; // Get the userId from the authenticated user (from middleware)
@@ -269,5 +276,32 @@ export const getAllServices = async (req, res) => {
       });
     }
 };
+
+export const getCart = async (req, res) => {
+    const userId = req.user._id; 
+  
+    try {
+      const cart = await Cart.findOne({ userId }).populate('services.serviceId');
+      
+      if (!cart) {
+        return res.status(404).json({
+          success: false,
+          message: 'Cart is empty or not found',
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        cart,
+      });
+    } catch (error) {
+      console.error('Error fetching cart:', error.message);
+      res.status(500).json({
+        success: false,
+        message: 'Server error while fetching cart',
+      });
+    }
+  };
+  
 
   

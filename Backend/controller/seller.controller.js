@@ -75,10 +75,10 @@ export const login = async ( req , res ) => {
 
 export const createService = async (req, res) => {
     try {
-      const { name, description, price } = req.body;
+      const { name, description, price , img_url } = req.body;
   
       // Validate fields
-      if (!name || !description || !price) {
+      if (!name || !description || !price || !img_url ) {
         return res.status(400).json({ error: "All fields are required" });
       }
   
@@ -99,6 +99,7 @@ export const createService = async (req, res) => {
         name,
         description,
         price,
+        img_url,
         sellerId, // Linking the service to the authenticated seller
       });
   
@@ -129,11 +130,11 @@ export const createService = async (req, res) => {
   
   export const editService = async (req, res) => {
     try {
-      const { name, description, price } = req.body;
+      const { name, description, price , img_url } = req.body;
       const serviceId = req.params.id; // Get serviceId from URL parameters
   
       // Validate the fields
-      if (!name || !description || !price) {
+      if (!name || !description || !price || !img_url) {
         return res.status(400).json({ error: "All fields are required" });
       }
   
@@ -159,6 +160,7 @@ export const createService = async (req, res) => {
       service.name = name;
       service.description = description;
       service.price = price;
+      service.img_url = img_url;
   
       await service.save();
   

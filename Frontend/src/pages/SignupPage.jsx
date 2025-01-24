@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../asset/AuthPage.css";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -41,7 +43,7 @@ function SignupPage() {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Registration Successful!");
+        navigate('/signin')
       } else {
         alert(data.message || "Something went wrong!");
       }
