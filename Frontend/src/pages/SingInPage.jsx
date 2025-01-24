@@ -6,22 +6,35 @@ function SigninPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    isSeller: false, // State to track if the user is a seller
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Determine the API endpoint based on the 'isSeller' state
+    const apiUrl = formData.isSeller
+      ? "http://localhost:12000/seller/login"
+      : "http://localhost:12000/user/login";
+
     try {
-      const response = await fetch("http://localhost:12000/user/login", {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
       const data = await response.json();
@@ -70,6 +83,17 @@ function SigninPage() {
                 className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 required
               />
+            </div>
+            {/* Add a checkbox to indicate if the user is a seller */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="isSeller"
+                checked={formData.isSeller}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              <label className="text-sm text-gray-700">I am a seller</label>
             </div>
             <button
               type="submit"

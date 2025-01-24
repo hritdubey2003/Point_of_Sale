@@ -1,9 +1,15 @@
 import express from "express";
-import { login, register } from "../controller/user.controller.js";
+import { addServiceToCart, getAllServices, login, logout, purchaseFromCart, register, removeServiceFromCart } from "../controller/user.controller.js";
+import { AuthUser } from "../middleware/Auth.middleware.js";
 
 const userRoute = express.Router();
 
 userRoute.post('/register' , register);
-userRoute.post('/login' , login)
+userRoute.post('/login' , login);
+userRoute.get('/services' , AuthUser , getAllServices );
+userRoute.post('/cart/add' , AuthUser ,addServiceToCart );
+userRoute.post('/cart/remove' , AuthUser, removeServiceFromCart );
+userRoute.post('/cart/purchase' , AuthUser , purchaseFromCart );
+userRoute.post('/logout' , AuthUser , logout );
 
 export default userRoute;
