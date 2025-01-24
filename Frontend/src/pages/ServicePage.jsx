@@ -168,7 +168,7 @@ function ServicePage() {
                     {service.description}
                   </p>
                   <p className="text-xl font-bold text-green-600 mb-4">
-                    ${service.price}
+                    INR{service.price}
                   </p>
 
                   <div className="flex justify-center items-center space-x-4 mb-4">
@@ -192,7 +192,7 @@ function ServicePage() {
                   <div className="mt-6">
                     <button
                       onClick={() => handleAddToCart(service)}
-                      disabled={loading[service._id]} // Disable only this button
+                      disabled={loading[service._id]} 
                       className={`w-full py-2 text-white rounded-lg transition duration-200 ${
                         loading[service._id]
                           ? "bg-gray-400"
