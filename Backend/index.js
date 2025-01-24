@@ -10,12 +10,7 @@ App.use(express.json());
 
 import cors from 'cors';
 
-const corsOptions = {
-  origin: 'http://localhost:5173',  // Frontend URL
-  credentials: true,  // Allow cookies to be sent and received
-};
-
-App.use(cors(corsOptions));
+App.use(cors());
 
 App.use(cookieParser());
 
