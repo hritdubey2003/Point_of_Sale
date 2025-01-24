@@ -21,7 +21,7 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
 
-  // Fetch cart data and check authentication on mount
+  // Fetching the data avaipable insde the cart for listing them to frontend UI
   useEffect(() => {
     const checkAuthentication = async () => {
       if (!token) {
@@ -260,7 +260,7 @@ const CheckoutPage = () => {
               </button>
             </form>
 
-            {/* Modal for Bill */}
+            {/* Modal appearance for Billing System*/}
             {isModalOpen && cartData && (
               <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white rounded-lg p-8 shadow-lg w-96">

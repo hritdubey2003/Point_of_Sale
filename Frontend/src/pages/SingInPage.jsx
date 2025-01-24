@@ -8,7 +8,7 @@ function SigninPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    isSeller: false, // State to track if the user is a seller
+    isSeller: false, 
   });
 
   const handleChange = (e) => {
@@ -32,7 +32,7 @@ function SigninPage() {
   
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem('authToken', data.token); // Store token
+        localStorage.setItem('authToken', data.token); 
         navigate('/services');
       } else {
         alert(data.message || "Invalid Credentials");
@@ -78,7 +78,7 @@ function SigninPage() {
                 required
               />
             </div>
-            {/* Add a checkbox to indicate if the user is a seller */}
+            {/* Added a checkbox for finding out the seller or not */}
             <div className="flex items-center">
               <input
                 type="checkbox"

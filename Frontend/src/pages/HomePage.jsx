@@ -10,14 +10,14 @@ function HomePage() {
     <>
       <Navbar className="bg-transparent" />
       <div className="h-screen bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 relative overflow-hidden text-white">
-        {/* Dandelion Animation */}
+        {/* Dandelion Animation Block Section*/}
         <div className="dandelion-container">
           {Array.from({ length: 50 }).map((_, i) => (
             <div key={i} className="dandelion" style={{ '--i': i }}></div>
           ))}
         </div>
 
-        {/* Hero Section */}
+        {/* Main Component Section */}
         <section className="flex flex-col items-center justify-center h-full px-4 text-center animate-fade-in z-10 relative">
           <h1 className="text-5xl font-extrabold mb-6 leading-tight">
             One Point Solution to Every <br /> Service-Related Problem!
@@ -32,7 +32,7 @@ function HomePage() {
           </button>
         </section>
 
-        {/* Why Choose Us Section */}
+        {/* WHat makes us better */}
         <section className="py-20 bg-white text-gray-800 rounded-t-3xl relative z-20">
           <h2 className="text-3xl font-bold text-center mb-10">
             Why Choose Us?

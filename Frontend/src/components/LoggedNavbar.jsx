@@ -8,7 +8,7 @@ function LoggedNavbar({ cartQuantity }) {
 
   const handleCartClick = () => {
     console.log("I am here")
-    navigate("/cart"); // This is triggered on clicking the cart button
+    navigate("/cart");
   };
 
   const toggleMenu = () => {
@@ -27,7 +27,7 @@ function LoggedNavbar({ cartQuantity }) {
           <img src={logo} alt="Logo" className="w-10 h-auto" />
         </a>
 
-        {/* Mobile Menu Toggle Button */}
+        {/* For Mobile version of Menu Toggling Section */}
         <button
           onClick={toggleMenu}
           type="button"

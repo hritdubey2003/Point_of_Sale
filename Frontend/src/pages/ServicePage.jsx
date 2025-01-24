@@ -74,15 +74,17 @@ function ServicePage() {
     fetchCart();
   }, []);
 
+  // Taking care of the quantity
   const handleQuantityChange = (serviceId, change) => {
     setLocalQuantities((prev) => {
       const updatedQuantities = { ...prev };
       updatedQuantities[serviceId] = (updatedQuantities[serviceId] || 0) + change;
-      if (updatedQuantities[serviceId] < 0) updatedQuantities[serviceId] = 0; // Prevent negatives
+      if (updatedQuantities[serviceId] < 0) updatedQuantities[serviceId] = 0; 
       return updatedQuantities;
     });
   };
 
+  // fetching the add to cart API from Backend
   const handleAddToCart = async (service) => {
     const quantity = localQuantities[service._id] || 0;
     if (quantity === 0) return;
@@ -106,10 +108,10 @@ function ServicePage() {
 
       const data = await response.json();
       if (data.success) {
-        setCart(data.cart); // Update cart with API response
+        setCart(data.cart); 
         setLocalQuantities((prev) => ({
           ...prev,
-          [service._id]: 0, // Reset local counter for the service
+          [service._id]: 0,
         }));
       } else {
         console.error("Error adding to cart:", data.message);
@@ -117,7 +119,7 @@ function ServicePage() {
     } catch (error) {
       console.error("Error adding to cart:", error);
     } finally {
-      setLoading((prev) => ({ ...prev, [service._id]: false })); // Reset loading for this service
+      setLoading((prev) => ({ ...prev, [service._id]: false })); 
     }
   };
 
