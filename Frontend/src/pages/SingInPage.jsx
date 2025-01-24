@@ -21,7 +21,7 @@ function SigninPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = formData.isSeller ? "http://localhost:12000/seller/login" : "http://localhost:12000/user/login";
+    const apiUrl = formData.isSeller ? "https://point-of-sale-bay.vercel.app/seller/login" : "https://point-of-sale-bay.vercel.app/user/login";
   
     try {
       const response = await fetch(apiUrl, {

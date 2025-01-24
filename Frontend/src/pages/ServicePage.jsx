@@ -22,7 +22,7 @@ function ServicePage() {
       }
 
       try {
-        const response = await fetch("http://localhost:12000/user/services", {
+        const response = await fetch("https://point-of-sale-bay.vercel.app/user/services", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function ServicePage() {
       if (!token) return;
 
       try {
-        const response = await fetch("http://localhost:12000/user/getcartItems", {
+        const response = await fetch("https://point-of-sale-bay.vercel.app/user/getcartItems", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function ServicePage() {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://localhost:12000/user/cart/add", {
+      const response = await fetch("https://point-of-sale-bay.vercel.app/user/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -24,8 +24,8 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiEndpoint = formData.isSeller
-      ? "http://localhost:12000/seller/register"
-      : "http://localhost:12000/user/register";
+      ? "https://point-of-sale-bay.vercel.app/seller/register"
+      : "https://point-of-sale-bay.vercel.app/user/register";
 
     try {
       const response = await fetch(apiEndpoint, {

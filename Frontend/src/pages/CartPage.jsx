@@ -21,7 +21,7 @@ function CartPage() {
       }
 
       try {
-        const response = await fetch("http://localhost:12000/user/getcartItems", {
+        const response = await fetch("https://point-of-sale-bay.vercel.app/user/getcartItems", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function CartPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:12000/user/cart/remove", {
+      const response = await fetch("https://point-of-sale-bay.vercel.app/user/cart/remove", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function CartPage() {
     if (!token) return;
 
     try {
-      const response = await fetch("http://localhost:12000/user/getcartItems", {
+      const response = await fetch("https://point-of-sale-bay.vercel.app/user/getcartItems", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

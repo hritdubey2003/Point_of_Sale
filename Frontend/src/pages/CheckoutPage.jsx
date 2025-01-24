@@ -31,7 +31,7 @@ const CheckoutPage = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:12000/user/getcartItems', {
+        const response = await fetch('https://point-of-sale-bay.vercel.app/user/getcartItems', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const CheckoutPage = () => {
 
   const gotoService = async () => {
     try {
-      const response = await fetch('http://localhost:12000/user/cart/purchase', {
+      const response = await fetch('https://point-of-sale-bay.vercel.app/user/cart/purchase', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
