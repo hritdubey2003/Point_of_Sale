@@ -125,7 +125,7 @@ function CartPage() {
                     </h3>
                     <p className="text-sm text-gray-600 mb-4">{service.serviceId.description}</p>
                     <p className="text-xl font-bold text-green-600 mb-4">
-                      ${service.serviceId.price} x {service.quantity}
+                      INR: {service.serviceId.price} x {service.quantity}
                     </p>
 
                     <div className="mt-6">
