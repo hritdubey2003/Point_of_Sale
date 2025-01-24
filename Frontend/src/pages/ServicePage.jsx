@@ -7,7 +7,7 @@ function ServicePage() {
   const [services, setServices] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cart, setCart] = useState({});
-  const [localQuantities, setLocalQuantities] = useState({}); // Local counter for each service
+  const [localQuantities, setLocalQuantities] = useState({}); 
   const [loading, setLoading] = useState({});
   const Navigate = useNavigate();
 
@@ -64,7 +64,7 @@ function ServicePage() {
 
         const data = await response.json();
         if (data.success) {
-          setCart(data.cart); // Store cart data
+          setCart(data.cart); 
         }
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -134,7 +134,8 @@ function ServicePage() {
       {isAuthenticated ? (
         <div className="services-container p-8 bg-gray-50 min-h-screen">
           <h2 className="text-4xl font-semibold text-center text-gray-800 mb-12">
-            Premium Services
+            Our Premium Services! "
+            Ghar Ho Ye Office, We're Perfect at Service!"
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {services.map((service) => (
